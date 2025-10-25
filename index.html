@@ -6,32 +6,36 @@
   <meta name="color-scheme" content="dark" />
   <title>Anu Ajjan — Senior Advisor</title>
 
-    <!-- Main stylesheet -->
+  <!-- Main stylesheet -->
   <link rel="stylesheet" href="assets/style.css" />
 
   <!-- Fade-in animation (inline CSS) -->
   <style>
-    /* Smooth fade-in for lines and sections */
-    .fade-line {
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 0.9s ease, transform 0.9s ease;
+    /* Smooth fade-in for lines and blocks */
+    .fade-line{
+      opacity:0;
+      transform:translateY(10px);
+      transition:opacity .9s ease, transform .9s ease;
     }
-    .fade-line.visible {
-      opacity: 1;
-      transform: none;
+    .fade-line.visible{
+      opacity:1;
+      transform:none;
     }
+    /* Stagger helpers */
+    .fade-1{ transition-delay:.10s }
+    .fade-2{ transition-delay:.20s }
+    .fade-3{ transition-delay:.30s }
+    .fade-4{ transition-delay:.40s }
+    .fade-5{ transition-delay:.50s }
+    .fade-6{ transition-delay:.60s }
+    .fade-7{ transition-delay:.70s }
+    .fade-8{ transition-delay:.80s }
 
-    /* Optional staggered delay classes */
-    .fade-delay-1 { transition-delay: 0.15s; }
-    .fade-delay-2 { transition-delay: 0.3s; }
-    .fade-delay-3 { transition-delay: 0.45s; }
-    .fade-delay-4 { transition-delay: 0.6s; }
-
-    /* Prevent content flash */
-    body { background:#000; overflow-x:hidden; }
+    /* Prevent any flash on load */
+    body{ background:#000; overflow-x:hidden }
   </style>
-  
+</head>
+<body>
   <!-- Floating navigation -->
   <nav class="dock" aria-label="Section navigation">
     <button data-target="#home" aria-label="Go to Home">Home</button>
@@ -45,21 +49,21 @@
     <!-- HOME -->
     <section id="home" aria-label="Home" class="snap">
       <div class="wrap home">
-        <div class="avatar-wrap">
+        <div class="avatar-wrap fade-line fade-1">
           <img src="assets/profile.jpg" alt="Portrait of Anu Ajjan" class="avatar" />
         </div>
 
-        <h1 class="title">Anu Ajjan</h1>
-        <p class="sub">Senior advisor to leadership teams across Europe and the Middle East</p>
-        <p class="tag">Clarity. Delivery. Integrity.</p>
+        <h1 class="title fade-line fade-2">Anu Ajjan</h1>
+        <p class="sub fade-line fade-3">Senior advisor to leadership teams across Europe and the Middle East</p>
+        <p class="tag fade-line fade-4">Clarity. Delivery. Integrity.</p>
 
         <div class="about">
-          <p>I help organisations move from discussion to delivery — clear priorities, simple plans, steady results.</p>
-          <p>I draw on 20+ years advising leadership teams, supported by executive education in applied business analytics at MIT Sloan — used practically to support good decisions.</p>
-          <p>I work with public institutions, research organisations, and companies where cross-team alignment and governance matter.</p>
+          <p class="fade-line fade-5">I help organisations move from discussion to delivery — clear priorities, simple plans, steady results.</p>
+          <p class="fade-line fade-6">I draw on 20+ years advising leadership teams, supported by executive education in applied business analytics at MIT Sloan — used practically to support good decisions.</p>
+          <p class="fade-line fade-7">I work with public institutions, research organisations, and companies where cross-team alignment and governance matter.</p>
         </div>
 
-        <blockquote class="quote">
+        <blockquote class="quote fade-line fade-8">
           “His professional and constructive nature, focus, and diplomatic skills made him a highly valued partner in one of the world’s largest scientific expeditions.”
           <cite>— Prof. Dr. Stefan Frickenhaus, Alfred Wegener Institute (AWI)</cite>
         </blockquote>
@@ -69,21 +73,21 @@
     <!-- WHAT I DO -->
     <section id="what" aria-label="What I Do" class="snap">
       <div class="wrap">
-        <h2>What I Do</h2>
+        <h2 class="fade-line fade-1">What I Do</h2>
         <div class="grid">
-          <div class="card">
+          <div class="card fade-line fade-2">
             <h3>From strategy to delivery</h3>
             <p>Turn direction into a clear plan with owners, milestones, and transparent reporting.</p>
           </div>
-          <div class="card">
+          <div class="card fade-line fade-3">
             <h3>Operating model &amp; governance</h3>
             <p>Make roles and decision rights simple and reliable — with a working cadence.</p>
           </div>
-          <div class="card">
+          <div class="card fade-line fade-4">
             <h3>Leadership alignment</h3>
             <p>Focus leadership time on the few moves that matter. Agree priorities, remove blockers, and build trust across teams.</p>
           </div>
-          <div class="card">
+          <div class="card fade-line fade-5">
             <h3>Executive support</h3>
             <p>Prepare decision packs and briefings so boards can move with confidence.</p>
           </div>
@@ -94,21 +98,21 @@
     <!-- HOW I WORK -->
     <section id="how" aria-label="How I Work" class="snap">
       <div class="wrap">
-        <h2>How I Work</h2>
+        <h2 class="fade-line fade-1">How I Work</h2>
         <div class="grid">
-          <div class="card">
+          <div class="card fade-line fade-2">
             <h3>Clear scope</h3>
             <p>Shared objectives, responsibilities, and timelines. No surprises.</p>
           </div>
-          <div class="card">
+          <div class="card fade-line fade-3">
             <h3>Structured delivery</h3>
             <p>Simple routines: weekly checkpoints, visible status, and documented decisions.</p>
           </div>
-          <div class="card">
+          <div class="card fade-line fade-4">
             <h3>Responsible data use</h3>
             <p>Facts first, privacy respected. Only the information needed to decide.</p>
           </div>
-          <div class="card">
+          <div class="card fade-line fade-5">
             <h3>Reliable handover</h3>
             <p>Outcomes documented. Teams enabled to continue without external support.</p>
           </div>
@@ -119,16 +123,16 @@
     <!-- CLIENTS -->
     <section id="clients" aria-label="Clients" class="snap">
       <div class="wrap">
-        <h2>Clients</h2>
-        <p class="lead">
+        <h2 class="fade-line fade-1">Clients</h2>
+        <p class="lead fade-line fade-2">
           I work with senior teams in public administration, research, consulting &amp; services, and regulated industries
           where decisions are complex and execution must be dependable.
         </p>
         <ul class="bullets">
-          <li>Government &amp; public bodies</li>
-          <li>Research institutions</li>
-          <li>Consultancies &amp; services firms</li>
-          <li>Logistics / regulated sectors</li>
+          <li class="fade-line fade-3">Government &amp; public bodies</li>
+          <li class="fade-line fade-4">Research institutions</li>
+          <li class="fade-line fade-5">Consultancies &amp; services firms</li>
+          <li class="fade-line fade-6">Logistics / regulated sectors</li>
         </ul>
       </div>
     </section>
@@ -136,10 +140,10 @@
     <!-- CONTACT -->
     <section id="contact" aria-label="Contact" class="snap">
       <div class="wrap">
-        <h2>Contact</h2>
-        <p class="lead">Share a few details and I’ll respond if it fits current advisory work.</p>
+        <h2 class="fade-line fade-1">Contact</h2>
+        <p class="lead fade-line fade-2">Share a few details and I’ll respond if it fits current advisory work.</p>
 
-        <form id="contact-form" action="/api/contact" method="POST" novalidate>
+        <form id="contact-form" action="/api/contact" method="POST" novalidate class="fade-line fade-3">
           <div class="two">
             <label>First name
               <input type="text" name="first_name" autocomplete="given-name" required>
@@ -186,12 +190,29 @@
           <p class="small hint">No phone number required. Your email is used only to respond to this inquiry.</p>
         </form>
 
-        <footer>© 2025 Anu Ajjan</footer>
+        <footer class="fade-line fade-4">© 2025 Anu Ajjan</footer>
       </div>
     </section>
   </main>
 
-  <!-- JS -->
+  <!-- Existing site JS -->
   <script src="assets/script.js"></script>
+
+  <!-- Fade-in activation (IntersectionObserver) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const items = document.querySelectorAll('.fade-line');
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+
+      items.forEach(el => io.observe(el));
+    });
+  </script>
 </body>
 </html>
