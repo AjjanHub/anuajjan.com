@@ -1,0 +1,62 @@
+/* Global */
+*{box-sizing:border-box}
+html,body{height:100%}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:#000;
+  color:#f4f4f4;
+  font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  overflow-y: scroll;
+  scroll-snap-type:y mandatory;   /* section “magnet” */
+}
+
+/* Sections (each fills one screen) */
+.section{
+  min-height:100vh;
+  scroll-snap-align:start;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:48px 20px;
+}
+.container{max-width:960px; width:100%}
+
+/* Headings & text */
+h1,h2{margin:0 0 16px}
+h1{font-size:42px; letter-spacing:.3px}
+h2{font-size:28px; color:#cfcfcf}
+p{margin:0 0 14px; color:#e8e8e8}
+
+/* Floating nav (top–center) */
+.floating-nav{
+  position:fixed; top:10px; left:50%; transform:translateX(-50%);
+  display:flex; gap:10px; z-index:10; backdrop-filter:saturate(120%) blur(4px);
+}
+.floating-nav a{
+  text-decoration:none; padding:10px 14px; border:1px solid #2b2b2b;
+  color:#fff; border-radius:999px; background:rgba(20,20,20,.6);
+}
+.floating-nav a:hover{background:#1e1e1e}
+
+/* Profile image – no visible border */
+.hero-photo{
+  width:132px; height:132px; border-radius:50%;
+  object-fit:cover; border:none; display:block; margin:0 auto 18px;
+}
+
+/* Buttons */
+.btn{
+  display:inline-block; padding:12px 18px; border-radius:10px;
+  border:1px solid #2b2b2b; color:#fff; text-decoration:none;
+  background:#151515;
+}
+.btn:hover{background:#1e1e1e}
+
+/* Contact form */
+form label{display:block; margin:12px 0 6px}
+input,textarea{
+  width:100%; padding:12px 14px; border:1px solid #2b2b2b; border-radius:10px;
+  background:#0f0f0f; color:#fff;
+}
+textarea{min-height:120px; resize:vertical}
