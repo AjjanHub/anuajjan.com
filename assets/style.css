@@ -20,8 +20,25 @@ body{
   line-height:1.65;
   -webkit-text-size-adjust:100%;
 }
+/* ===== One-time fade reveal (appears only on first load) ===== */
+html.preload body {
+  opacity: 0;
+}
+body {
+  transition: opacity .6s ease;
+}
 
-/* ----- Layout ----- */
+/* ===== Status line colors for contact form ===== */
+#form-status {
+  margin-top: 8px;
+  min-height: 1.2em;
+}
+#form-status.is-ok {
+  color: #a6f3a6; /* success green */
+}
+#form-status.is-err {
+  color: #ffb3b3; /* error red */
+}/* ----- Layout ----- */
 main{scroll-snap-type:y mandatory}
 section.snap{
   min-height:100svh;
