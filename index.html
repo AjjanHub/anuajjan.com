@@ -1,124 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Anu Ajjan — Senior Advisor</title>
-  <meta name="color-scheme" content="dark">
-  <style>
-    :root{--bg:#000;--fg:#fff;--muted:#cfcfcf;--border:#222;--panel:#0b0b0b;--accent:#fff;--w:980px;--dock-h:58px}
-    *{box-sizing:border-box} html,body{height:100%} html{scroll-behavior:smooth}
-    body{margin:0;background:var(--bg);color:var(--fg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.7;-webkit-text-size-adjust:100%;overflow-y:scroll;scroll-snap-type:y mandatory}
-    section{min-height:100svh;display:flex;align-items:flex-start;justify-content:center;scroll-snap-align:start;scroll-snap-stop:always;padding:calc(var(--dock-h) + 22px) 16px 28px}
-    .wrap{width:100%;max-width:var(--w);margin:0 auto}
-    h1{font-size:clamp(30px,5.4vw,56px);margin:8px 0 6px;text-align:center}
-    .subhead{font-size:clamp(18px,3.6vw,24px);color:#e6e6e6;text-align:center;margin:2px 0 14px}
-    h2{font-size:clamp(18px,3.4vw,22px);color:var(--muted);margin:0 0 18px;text-align:center}
-    h3.tagline{font-weight:600;color:#e6e6e6;opacity:.9;letter-spacing:.02em;text-align:center;margin:4px 0 16px;font-size:clamp(16px,2.6vw,19px)}
-    p{color:#f0f0f0}.muted{color:#cfcfcf}
-    .card{border:1px solid var(--border);border-radius:12px;padding:22px;background:var(--panel);margin:12px 0}
-    #home .home-inner{display:flex;flex-direction:column;align-items:center;gap:16px;width:100%}
-    .avatar{width:min(34vw,210px);min-width:148px;height:auto;display:block;border-radius:12px;
-      -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 78%, transparent 100%);
-      mask-image: radial-gradient(circle at 50% 50%, #000 78%, transparent 100%);
-      box-shadow: 0 18px 60px rgba(0,0,0,.55);
-    }
-    #home .text{max-width:840px;margin:0 auto;text-align:center}
-    .about p{margin:.6em 0}.about p + p{margin-top:.8em}.about{font-size:clamp(16px,2.6vw,18px)}
-    .quote{margin:18px auto 0;max-width:840px;padding:16px 18px;border:1px solid var(--border);border-radius:12px;background:#0a0a0a;color:#eaeaea;font-size:clamp(15px,2.4vw,17px)}
-    .quote cite{display:block;color:#bdbdbd;margin-top:10px;font-style:normal;font-size:.95em}
-    form{max-width:720px;margin:18px auto 0;display:grid;gap:12px}
-    .row2{display:grid;grid-template-columns:1fr;gap:12px}
-    input,select,textarea{width:100%;padding:14px 14px;border-radius:10px;border:1px solid var(--border);background:#0a0a0a;color:#fff;font-size:16px}
-    textarea{min-height:140px}
-    label{font-size:15px;color:#d8d8d8}
-    .small{font-size:12px;color:#9a9a9a}
-    footer{margin-top:16px;color:#9a9a9a;font-size:12px;text-align:center}
-    .dock{position:fixed;top:10px;left:50%;transform:translateX(-50%);z-index:50;display:flex;gap:10px;padding:8px 10px;background:rgba(0,0,0,.55);border:1px solid var(--border);border-radius:12px;backdrop-filter:saturate(160%) blur(10px);-webkit-backdrop-filter:saturate(160%) blur(10px);height:var(--dock-h);align-items:center}
-    .dock button{appearance:none;border:1px solid var(--border);background:#101010;color:#fff;padding:8px 12px;border-radius:10px;font-size:14px;font-weight:600;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease,opacity .18s ease;opacity:.9}
-    .dock button:hover,.dock button:focus{border-color:#666;outline:none}
-    .dock button.active{transform:translateY(-1px) scale(1.08);box-shadow:0 8px 26px rgba(255,255,255,.09);border-color:#9a9a9a;opacity:1}
-    .reveal{opacity:0;transform:translateY(10px);transition:opacity .5s ease,transform .5s ease}
-    .reveal.in{opacity:1;transform:none}
-    .list{max-width:840px;margin:0 auto}
-    .list ul{margin:0 0 6px 18px}
-    .list li{margin:6px 0}
-    @media (min-width: 700px){.row2{grid-template-columns:1fr 1fr}}
-  </style>
+  <meta name="color-scheme" content="dark" />
+  <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
-  <div class="dock" role="navigation" aria-label="Section navigation">
-    <button data-target="#home">Home</button>
+  <!-- Floating navigation (top, centered) -->
+  <nav class="dock" aria-label="Section navigation">
+    <button data-target="#home" class="active">Home</button>
     <button data-target="#what">What I Do</button>
     <button data-target="#how">How I Work</button>
     <button data-target="#clients">Clients</button>
     <button data-target="#contact">Contact</button>
-  </div>
+  </nav>
 
   <main>
+    <!-- HOME -->
     <section id="home" aria-label="Home">
       <div class="wrap home-inner reveal">
-        <img class="avatar" src="./assets/profile.jpg" alt="Portrait of Anu Ajjan">
+        <img class="avatar" src="assets/profile.jpg" alt="Portrait of Anu Ajjan" />
         <h1>Anu Ajjan</h1>
-        <div class="subhead">Senior advisor to leadership teams across Europe and the Middle East</div>
+        <p class="subhead">Senior advisor to leadership teams across Europe and the Middle East</p>
         <h3 class="tagline">Clarity. Delivery. Integrity.</h3>
         <div class="text about">
-          <p>I help organisations move from discussion to delivery. My work is to create clear priorities, simple plans, and steady results.</p>
-          <p>My approach blends more than 20 years advising leadership teams with executive education in applied business analytics at MIT Sloan — used practically to support good decisions.</p>
-          <p>I work with public institutions, research organisations, and companies where cross‑team alignment and governance matter.</p>
+          <p>I help organisations move from discussion to delivery. Clear priorities, simple plans, steady results.</p>
+          <p>I bring 20+ years working with senior teams. Executive education in applied business analytics at MIT Sloan supports a practical, evidence-based approach to decisions.</p>
+          <p>I work with public institutions, research organisations, and companies where cross-team alignment and governance matter.</p>
         </div>
-        <div class="quote">
+        <blockquote class="quote">
           “His professional and constructive nature, focus, and diplomatic skills made him a highly valued partner in one of the world’s largest scientific expeditions.”
           <cite>— Prof. Dr. Stefan Frickenhaus, Alfred Wegener Institute (AWI)</cite>
-        </div>
+        </blockquote>
       </div>
     </section>
 
+    <!-- WHAT -->
     <section id="what" aria-label="What I Do">
       <div class="wrap reveal">
         <h2>What I Do</h2>
         <div class="list">
-          <div class="card"><h3>From strategy to delivery</h3><p>Turn direction into a clear plan with owners, milestones, and transparent reporting.</p></div>
+          <div class="card"><h3>From strategy to delivery</h3><p>Turn direction into an actionable plan with owners, milestones, and transparent reporting.</p></div>
           <div class="card"><h3>Operating model & governance</h3><p>Make roles and decision rights simple and reliable — with a working cadence.</p></div>
-          <div class="card"><h3>Leadership alignment</h3><p>Focus leadership time on the few moves that matter. Agree priorities, remove blockers, and build trust across teams.</p></div>
-          <div class="card"><h3>Executive support</h3><p>Prepare decision packs and briefings so boards can move with confidence.</p></div>
+          <div class="card"><h3>Leadership alignment</h3><p>Focus leadership time on the few moves that matter. Agree priorities, clear blockers, build trust.</p></div>
+          <div class="card"><h3>Executive support</h3><p>Decision packs and briefings that let boards move with confidence.</p></div>
         </div>
       </div>
     </section>
 
+    <!-- HOW -->
     <section id="how" aria-label="How I Work">
       <div class="wrap reveal">
         <h2>How I Work</h2>
         <div class="list">
           <div class="card"><h3>Clear scope</h3><p>Shared objectives, responsibilities, and timelines. No surprises.</p></div>
-          <div class="card"><h3>Structured delivery</h3><p>Simple routines: weekly checkpoints, visible status, and documented decisions.</p></div>
-          <div class="card"><h3>Responsible data use</h3><p>Facts first, privacy respected. Only the information needed to decide.</p></div>
-          <div class="card"><h3>Reliable handover</h3><p>Outcomes documented. Teams enabled to continue without external support.</p></div>
+          <div class="card"><h3>Structured delivery</h3><p>Simple routines: weekly checkpoints, visible status, written decisions.</p></div>
+          <div class="card"><h3>Responsible data use</h3><p>Facts first, privacy respected. Only what’s needed to decide.</p></div>
+          <div class="card"><h3>Reliable handover</h3><p>Outcomes documented. Teams continue without external support.</p></div>
         </div>
       </div>
     </section>
 
+    <!-- CLIENTS -->
     <section id="clients" aria-label="Clients">
       <div class="wrap reveal">
         <h2>Clients</h2>
-        <p class="muted" style="max-width:860px;margin:0 auto;text-align:center">
-          I work with senior teams in public administration, research, consulting and services, and logistics/regulated industries.
-          The work usually spans multiple stakeholders and requires clear structure, sound decisions, and dependable execution.
+        <p class="muted center">
+          I support senior teams in public administration, research, consulting and services, and logistics/regulated industries —
+          typically where several stakeholders must align and execution must be dependable.
         </p>
       </div>
     </section>
 
+    <!-- CONTACT -->
     <section id="contact" aria-label="Contact">
       <div class="wrap reveal">
         <h2>Contact</h2>
         <p class="muted">Share a few details and I’ll respond if it fits current advisory work.</p>
+
+        <!-- IMPORTANT: this posts to your Cloudflare Worker route on your domain -->
         <form action="/api/contact" method="POST">
           <div class="row2">
-            <label>First name<input type="text" name="first_name" required></label>
-            <label>Last name<input type="text" name="last_name" required></label>
+            <label>First name<input type="text" name="first_name" required /></label>
+            <label>Last name<input type="text" name="last_name" required /></label>
           </div>
           <div class="row2">
-            <label>Email<input type="email" name="email" required></label>
+            <label>Email<input type="email" name="email" required /></label>
             <label>Country
               <select name="country">
                 <option>Germany</option><option>United Arab Emirates</option><option>United Kingdom</option>
@@ -126,33 +95,25 @@
               </select>
             </label>
           </div>
-          <label>Organisation<input type="text" name="organisation"></label>
-          <label>What do you need help with?<textarea name="message" placeholder="A few sentences on context, goals, and timeline"></textarea></label>
-          <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
-          <label class="small"><input type="checkbox" name="consent" required> I agree to be contacted about this inquiry.</label>
-          <button class="btn" type="submit" style="border:1px solid var(--accent);background:var(--accent);color:#000;padding:12px 16px;border-radius:8px;font-weight:700">Send</button>
+          <label>Organisation<input type="text" name="organisation" /></label>
+          <label>What do you need help with?
+            <textarea name="message" placeholder="A few sentences on context, goals, and timeline"></textarea>
+          </label>
+
+          <!-- Honeypot -->
+          <input type="text" name="website" autocomplete="off" tabindex="-1" class="honeypot" />
+
+          <label class="small"><input type="checkbox" name="consent" required /> I agree to be contacted about this inquiry.</label>
+
+          <button class="btn" type="submit">Send</button>
           <p class="small">No phone number required. Your email is used only to respond to this inquiry.</p>
         </form>
+
         <footer>© 2025 Anu Ajjan</footer>
       </div>
     </section>
   </main>
 
-  <script>
-    const buttons = Array.from(document.querySelectorAll('.dock button'));
-    const sections = Array.from(document.querySelectorAll('main > section'));
-    const ids = sections.map(s => '#' + s.id);
-    buttons.forEach((b,i)=> b.dataset.target = ids[i]);
-    buttons.forEach(btn => { btn.addEventListener('click', (e) => { e.preventDefault(); const t = document.querySelector(btn.dataset.target); if(t) t.scrollIntoView({behavior:'smooth', block:'start'}); }); });
-    const io = new IntersectionObserver((entries)=>{ entries.forEach(e=>{ if(e.isIntersecting){ const id = '#' + e.target.id; buttons.forEach(b=>b.classList.toggle('active', b.dataset.target === id)); const rev = e.target.querySelector('.reveal'); if (rev) rev.classList.add('in'); } }); }, { threshold: 0.6 });
-    sections.forEach(sec => io.observe(sec));
-    let isScrolling = false;
-    function currentSectionIndex() { let best=0,bestDist=Infinity,top=window.scrollY; sections.forEach((s,i)=>{const d=Math.abs(s.offsetTop-top); if(d<bestDist){bestDist=d;best=i;}}); return best; }
-    function scrollToIndex(idx){ if(idx<0||idx>=sections.length) return; isScrolling = true; sections[idx].scrollIntoView({behavior:'smooth', block:'start'}); setTimeout(()=> isScrolling=false, 700); }
-    window.addEventListener('wheel', (e)=>{ const tag=(e.target.tagName||'').toLowerCase(); if(['input','textarea','select','button','label'].includes(tag)) return; if(isScrolling) return; if(Math.abs(e.deltaY)<20) return; e.preventDefault(); const idx=currentSectionIndex(); scrollToIndex(idx + (e.deltaY>0?1:-1)); }, {passive:false});
-    let touchStartY=null;
-    window.addEventListener('touchstart',(e)=>{ if(e.touches&&e.touches.length) touchStartY=e.touches[0].clientY; }, {passive:true});
-    window.addEventListener('touchend',(e)=>{ if(touchStartY===null) return; const endY=(e.changedTouches&&e.changedTouches[0].clientY)||touchStartY; const d=touchStartY-endY; touchStartY=null; if(Math.abs(d)<40) return; if(isScrolling) return; const tag=(e.target&&e.target.tagName||'').toLowerCase(); if(['input','textarea','select','button','label'].includes(tag)) return; const idx=currentSectionIndex(); scrollToIndex(idx + (d>0?1:-1)); }, {passive:true});
-  </script>
+  <script defer src="assets/script.js"></script>
 </body>
 </html>
