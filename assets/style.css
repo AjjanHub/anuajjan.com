@@ -1,114 +1,116 @@
 :root{
-  --bg:#000; --fg:#fff; --muted:#cfcfcf; --border:#222; --panel:#0b0b0b; --accent:#fff;
-  --w:980px; --dock-h:58px
+  --bg:#000;           /* background */
+  --fg:#fff;           /* main text */
+  --muted:#cfcfcf;     /* secondary text */
+  --border:#232323;    /* borders */
+  --panel:#0b0b0b;     /* cards/panels */
+  --accent:#ffffff;    /* buttons */
+  --maxw:980px;        /* content width */
+  --dock-h:56px;       /* nav height */
 }
 
 *{box-sizing:border-box}
 html,body{height:100%}
 html{scroll-behavior:smooth}
 body{
-  margin:0; background:var(--bg); color:var(--fg);
+  margin:0;
+  background:var(--bg);
+  color:var(--fg);
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  line-height:1.7; -webkit-text-size-adjust:100%;
-  overflow-y:scroll; scroll-snap-type:y mandatory;
+  line-height:1.65;
+  -webkit-text-size-adjust:100%;
 }
 
-section{
-  min-height:100svh; display:flex; align-items:flex-start; justify-content:center;
-  scroll-snap-align:start; scroll-snap-stop:always;
+/* ----- Layout ----- */
+main{scroll-snap-type:y mandatory}
+section.snap{
+  min-height:100svh;
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  scroll-snap-align:start;
+  scroll-snap-stop:always;
   padding:calc(var(--dock-h) + 22px) 16px 28px;
 }
+.wrap{width:100%;max-width:var(--maxw);margin:0 auto}
+.home{display:flex;flex-direction:column;align-items:center;text-align:center}
 
-.wrap{width:100%; max-width:var(--w); margin:0 auto}
+/* Titles */
+h1.title{font-size:clamp(30px,5.2vw,52px);margin:10px 0 4px}
+h2{font-size:clamp(20px,3.6vw,26px);color:#e9e9e9;text-align:center;margin:0 0 18px}
+.sub{font-size:clamp(16px,2.8vw,18px);color:#e0e0e0;margin:2px 0 10px}
+.tag{font-weight:600;color:#f2f2f2;opacity:.92;letter-spacing:.02em;margin:0 0 16px}
 
-h1{font-size:clamp(30px,5.4vw,56px); margin:8px 0 6px; text-align:center}
-.subhead{font-size:clamp(18px,3.6vw,24px); color:#e6e6e6; text-align:center; margin:2px 0 14px}
-h2{font-size:clamp(18px,3.4vw,22px); color:var(--muted); margin:0 0 18px; text-align:center}
-h3.tagline{font-weight:600; color:#e6e6e6; opacity:.9; letter-spacing:.02em; text-align:center; margin:4px 0 16px; font-size:clamp(16px,2.6vw,19px)}
-p{color:#f0f0f0}
-.muted{color:#cfcfcf}
-.card{border:1px solid var(--border); border-radius:12px; padding:22px; background:var(--panel); margin:12px 0}
-
-#home .home-inner{
-  display:flex; flex-direction:column; align-items:center; gap:16px; width:100%;
-}
-
-/* Make images scale down on small screens */
-img{max-width:100%; height:auto; display:block}
-
-/* Avatar: smaller and capped on iPhone; no visible white border */
-.avatar{
-  width:120px; max-width:32vw; min-width:96px; height:auto; border-radius:12px;
-  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 78%, transparent 100%);
-  mask-image: radial-gradient(circle at 50% 50%, #000 78%, transparent 100%);
-  box-shadow: 0 18px 60px rgba(0,0,0,.55);
-}
-
-#home .text{max-width:840px; margin:0 auto; text-align:center}
+/* Text blocks */
+.about{max-width:860px;margin:0 auto}
 .about p{margin:.6em 0}
-.about p + p{margin-top:.8em}
-.about{font-size:clamp(16px,2.6vw,18px)}
+.lead{max-width:860px;margin:0 auto 12px;color:#e6e6e6;text-align:center}
+.bullets{max-width:640px;margin:12px auto 0;padding-left:18px}
+.bullets li{margin:6px 0}
 
-/* Quote constrained so center area isn't empty */
+/* Quote */
 .quote{
-  margin:18px auto 0; max-width:640px;
-  padding:16px 18px; border:1px solid var(--border); border-radius:12px;
-  background:#0a0a0a; color:#eaeaea; font-size:clamp(15px,2.4vw,17px)
+  margin:18px auto 0;max-width:860px;
+  padding:16px 18px;border:1px solid var(--border);
+  border-radius:12px;background:#0a0a0a;color:#ededed;font-size:clamp(15px,2.6vw,17px)
 }
-.quote cite{display:block; color:#bdbdbd; margin-top:10px; font-style:normal; font-size:.95em}
+.quote cite{display:block;color:#bdbdbd;margin-top:10px;font-style:normal;font-size:.95em}
 
-/* Form styles */
-form{max-width:720px; margin:18px auto 0; display:grid; gap:12px}
-.row2{display:grid; grid-template-columns:1fr; gap:12px}
+/* Avatar */
+.avatar-wrap{
+  width:100%;max-width:220px;margin:0 auto 8px;
+  display:flex;justify-content:center;align-items:center;
+}
+.avatar{width:100%;height:auto;border-radius:12px;box-shadow:0 18px 60px rgba(0,0,0,.55)}
+
+/* Cards / grid */
+.grid{display:grid;grid-template-columns:1fr;gap:12px;max-width:900px;margin:0 auto}
+.card{
+  border:1px solid var(--border);border-radius:12px;background:var(--panel);
+  padding:18px 18px 16px
+}
+.card h3{margin:0 0 6px;font-size:18px}
+
+/* Contact form */
+form{max-width:760px;margin:14px auto 0;display:grid;gap:12px}
+.two{display:grid;grid-template-columns:1fr;gap:12px}
+label{font-size:14px;color:#dcdcdc;display:grid;gap:8px}
 input,select,textarea{
-  width:100%; padding:14px 14px; border-radius:10px; border:1px solid var(--border);
-  background:#0a0a0a; color:#fff; font-size:16px
+  width:100%;padding:12px 12px;border-radius:10px;border:1px solid var(--border);
+  background:#0a0a0a;color:#fff;font-size:16px
 }
 textarea{min-height:140px}
-label{font-size:15px; color:#d8d8d8}
-.small{font-size:12px; color:#9a9a9a}
-footer{margin-top:16px; color:#9a9a9a; font-size:12px; text-align:center}
+.small{font-size:12px;color:#9a9a9a}
+.hint{margin-top:4px}
+.hp{display:none}
+.btn{
+  border:1px solid var(--accent);background:var(--accent);color:#000;
+  padding:12px 16px;border-radius:8px;font-weight:700;font-size:15px
+}
 
-/* Floating dock */
+/* Dock */
 .dock{
-  position:fixed; top:10px; left:50%; transform:translateX(-50%); z-index:50;
-  display:flex; gap:10px; padding:8px 10px; background:rgba(0,0,0,.55);
-  border:1px solid var(--border); border-radius:12px;
-  backdrop-filter:saturate(160%) blur(10px); -webkit-backdrop-filter:saturate(160%) blur(10px);
-  height:var(--dock-h); align-items:center
+  position:fixed;top:10px;left:50%;transform:translateX(-50%);
+  z-index:50;display:flex;gap:10px;padding:8px 10px;background:rgba(0,0,0,.55);
+  border:1px solid var(--border);border-radius:12px;
+  backdrop-filter:saturate(160%) blur(10px);-webkit-backdrop-filter:saturate(160%) blur(10px);
+  height:var(--dock-h);align-items:center
 }
 .dock button{
-  appearance:none; border:1px solid var(--border); background:#101010; color:#fff;
-  padding:8px 12px; border-radius:10px; font-size:14px; font-weight:600;
-  transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease,opacity .18s ease; opacity:.9
+  appearance:none;border:1px solid var(--border);background:#101010;color:#fff;
+  padding:8px 12px;border-radius:10px;font-size:14px;font-weight:600;
+  transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease,opacity .18s ease;
+  opacity:.92
 }
-.dock button:hover,.dock button:focus{border-color:#666; outline:none}
-.dock button.active{transform:translateY(-1px) scale(1.08); box-shadow:0 8px 26px rgba(255,255,255,.09); border-color:#9a9a9a; opacity:1}
+.dock button:hover,.dock button:focus{border-color:#6a6a6a;outline:none}
+.dock button.active{transform:translateY(-1px) scale(1.06);box-shadow:0 10px 28px rgba(255,255,255,.09);border-color:#9a9a9a;opacity:1}
 
-/* Lists */
-.list{max-width:840px; margin:0 auto}
-.list ul{margin:0 0 6px 18px}
-.list li{margin:6px 0}
-
-/* Tablet breakpoint: keep stacked but narrower text */
-@media (min-width: 600px) and (max-width: 1023px){
-  #home .text{max-width: 560px}
-  .quote{max-width: 560px}
+/* Responsive */
+@media (min-width: 720px){
+  .grid{grid-template-columns:1fr 1fr}
 }
-
-/* Desktop breakpoint: proper two-column hero */
-@media (min-width: 1024px){
-  #home .home-inner{
-    display:grid;
-    grid-template-columns:240px 1fr;
-    gap:48px;
-    align-items:start;
-  }
-  #home .text{max-width:560px; text-align:left; margin:0}
-  .quote{max-width:640px; margin:24px 0 0}
-}
-
-/* Small phones: ensure avatar never overwhelms */
-@media (max-width: 374px){
-  .avatar{width:92px; max-width:28vw; min-width:80px}
+@media (max-width: 520px){
+  .avatar-wrap{max-width:140px}
+  .dock{gap:6px;padding:6px 8px;height:52px}
+  .dock button{font-size:13px;padding:7px 10px}
 }
