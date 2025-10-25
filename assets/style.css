@@ -20,8 +20,18 @@ h1{ font-size:clamp(30px,5vw,52px) }
 /* Desktop: put avatar + intro text side-by-side to use width */
 @media (min-width: 1024px){
   #home .home-inner{
-    display:grid; grid-template-columns:220px 1fr; gap:24px; align-items:start;
+    display:grid;
+    grid-template-columns:240px 1fr;
+    gap:48px;
+    align-items:start;
   }
+
+  #home .text { max-width: 540px; }
+  #home .quote {
+    max-width: 640px;
+    margin-top: 24px;
+  }
+}
   #home .text, #home h1, #home .subhead, #home .tagline{ text-align:left }
   #home .avatar{ justify-self:center }
 }
