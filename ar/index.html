@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>أنو عجان — مستشار تنفيذي</title>
+  <link rel="alternate" hreflang="x-default" href="https://www.anuajjan.com/">
+  <link rel="alternate" hreflang="en" href="https://www.anuajjan.com/">
+  <link rel="alternate" hreflang="de" href="https://www.anuajjan.com/de/">
+  <link rel="alternate" hreflang="ar" href="https://www.anuajjan.com/ar/">
+  <style>
+    body{margin:0;font:16px/1.8 "Tajawal",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#e7e7e7;background:#000;direction:rtl;text-align:right}
+    main{max-width:980px;margin:0 auto;padding:28px}
+    a{color:#b8d4ff}
+    nav.lang-switch{position:sticky;top:0;padding:10px 0;background:#000;text-align:left;direction:ltr}
+    h1,h2{font-weight:700}
+    section{min-height:60svh;padding:20px 0}
+    .muted{color:#a8a8a8}
+    button, input, textarea, select{background:#0f0f0f;border:1px solid #2a2a2a;color:#fff;border-radius:8px;padding:10px}
+    form .row{display:grid;gap:10px;grid-template-columns:1fr 1fr}
+    form .row > *{width:100%}
+    @media (max-width:640px){form .row{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <nav class="lang-switch" aria-label="اللغة">
+    <a href="/" data-lang="en">EN</a> |
+    <a href="/de/" data-lang="de">DE</a> |
+    <a href="/ar/" data-lang="ar">AR</a>
+  </nav>
+
+  <main>
+    <header>
+      <h1>أنو عجان</h1>
+      <p class="muted">مستشار تنفيذي لفرق القيادة في أوروبا والشرق الأوسط.</p>
+    </header>
+
+    <section id="what-i-do">
+      <h2>ماذا أفعل</h2>
+      <ul>
+        <li>تحديد الأولويات وصياغة التوجّه الاستراتيجي</li>
+        <li>إدارة التنفيذ وضبط مسار التسليم</li>
+        <li>اتصال واضح على مستوى الإدارة العليا</li>
+      </ul>
+    </section>
+
+    <section id="how-i-work">
+      <h2>كيف أعمل</h2>
+      <p>أسلوب عملي، منظم، وعملي النتائج. وضوح في القرار، ووضوح في المسؤولية، ووضوح في الأثر.</p>
+    </section>
+
+    <section id="contact">
+      <h2>اتصل بي</h2>
+      <form id="contact-form" action="/api/contact" method="POST">
+        <div class="row">
+          <input name="firstName" placeholder="الاسم الأول" required>
+          <input name="lastName" placeholder="اسم العائلة">
+        </div>
+        <div class="row">
+          <input name="email" type="email" placeholder="البريد الإلكتروني" required>
+          <input name="organization" placeholder="الجهة / الشركة">
+        </div>
+        <select name="country">
+          <option value="Saudi Arabia">السعودية</option>
+          <option value="United Arab Emirates">الإمارات</option>
+          <option value="Qatar">قطر</option>
+          <option value="Germany">ألمانيا</option>
+          <option value="">دولة أخرى</option>
+        </select>
+        <textarea name="message" rows="6" placeholder="اكتب رسالتك..." required></textarea>
+        <label><input type="checkbox" required> أوافق على التواصل معي.</label>
+        <button type="submit">إرسال</button>
+      </form>
+      <p class="muted">يمكنك أيضًا المراسلة مباشرة على <a href="mailto:info@anuajjan.com">info@anuajjan.com</a>.</p>
+    </section>
+  </main>
+
+  <script>
+  // remember choice from the Arabic page as well
+  document.querySelectorAll('.lang-switch a').forEach(a=>{
+    a.addEventListener('click',()=>localStorage.setItem('langChoice',a.dataset.lang));
+  });
+  </script>
+</body>
+</html>
