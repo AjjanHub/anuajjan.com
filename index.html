@@ -1,49 +1,52 @@
-<style>
-html { scroll-behavior: smooth; }
-body {
-  margin: 0;
-  scroll-snap-type: y mandatory;
-  -webkit-overflow-scrolling: touch;
-}
-  <!-- water / glass overlay -->
-<svg id="water-svg" width="0" height="0">
-  <filter id="waterFilter">
-    <feTurbulence id="waterNoise" type="fractalNoise" baseFrequency="0.008" numOctaves="2" seed="2"/>
-    <feDisplacementMap id="waterDisp" in="SourceGraphic" in2="waterNoise" scale="8" xChannelSelector="R" yChannelSelector="G"/>
-  </filter>
-</svg>
-<div id="water-layer"></div>
-section {
-  min-height: 100svh;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-}
-#water-layer {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 999;
-  background:
-    radial-gradient(120% 80% at 50% -10%, rgba(255,255,255,.10), rgba(255,255,255,0) 60%),
-    radial-gradient(90% 60% at 80% 10%, rgba(255,255,255,.06), rgba(255,255,255,0) 60%);
-  filter: url(#waterFilter);
-  opacity: .35;
-  transition: opacity .25s ease;
-}
-@media (max-width:640px){ #water-layer{ opacity:.25; } }
-@media (prefers-reduced-motion: reduce){ #water-layer{ display:none; } }
-</style>
-<!DOCTYPE html>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
+<head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Anu Ajjan — Senior Advisor</title>
   <meta name="color-scheme" content="dark" />
   <link rel="stylesheet" href="assets/style.css" />
+
+  <style>
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    scroll-snap-type: y mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* water / glass overlay */
+  svg#water-svg { width: 0; height: 0; }
+  #water-layer {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 999;
+    background:
+      radial-gradient(120% 80% at 50% -10%, rgba(255,255,255,.10), rgba(255,255,255,0) 60%),
+      radial-gradient(90% 60% at 80% 10%, rgba(255,255,255,.06), rgba(255,255,255,0) 60%);
+    filter: url(#waterFilter);
+    opacity: .35;
+    transition: opacity .25s ease;
+  }
+  section {
+    min-height: 100svh;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+  @media (max-width:640px){ #water-layer{ opacity:.25; } }
+  @media (prefers-reduced-motion: reduce){ #water-layer{ display:none; } }
+  </style>
 </head>
 <body>
+  <body>
+  <svg id="water-svg" width="0" height="0">
+    <filter id="waterFilter">
+      <feTurbulence id="waterNoise" type="fractalNoise" baseFrequency="0.008" numOctaves="2" seed="2"/>
+      <feDisplacementMap id="waterDisp" in="SourceGraphic" in2="waterNoise" scale="8" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </svg>
+  <div id="water-layer"></div>
   <!-- Floating navigation (top, centered) -->
   <nav class="dock" aria-label="Section navigation">
     <button data-target="#home" class="active">Home</button>
