@@ -5,6 +5,14 @@ body {
   scroll-snap-type: y mandatory;
   -webkit-overflow-scrolling: touch;
 }
+  <!-- water / glass overlay -->
+<svg id="water-svg" width="0" height="0">
+  <filter id="waterFilter">
+    <feTurbulence id="waterNoise" type="fractalNoise" baseFrequency="0.008" numOctaves="2" seed="2"/>
+    <feDisplacementMap id="waterDisp" in="SourceGraphic" in2="waterNoise" scale="8" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+<div id="water-layer"></div>
 section {
   min-height: 100svh;
   scroll-snap-align: start;
