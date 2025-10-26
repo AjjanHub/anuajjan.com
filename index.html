@@ -1,3 +1,30 @@
+<style>
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  scroll-snap-type: y mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+section {
+  min-height: 100svh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+#water-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+  background:
+    radial-gradient(120% 80% at 50% -10%, rgba(255,255,255,.10), rgba(255,255,255,0) 60%),
+    radial-gradient(90% 60% at 80% 10%, rgba(255,255,255,.06), rgba(255,255,255,0) 60%);
+  filter: url(#waterFilter);
+  opacity: .35;
+  transition: opacity .25s ease;
+}
+@media (max-width:640px){ #water-layer{ opacity:.25; } }
+@media (prefers-reduced-motion: reduce){ #water-layer{ display:none; } }
+</style>
 <!DOCTYPE html>
 <html lang="en">
 <head>
