@@ -16,7 +16,6 @@
   }
 
   /* water / glass overlay */
-  svg#water-svg { width: 0; height: 0; }
   #water-layer {
     position: fixed;
     inset: 0;
@@ -29,17 +28,20 @@
     opacity: .35;
     transition: opacity .25s ease;
   }
+
   section {
     min-height: 100svh;
     scroll-snap-align: start;
     scroll-snap-stop: always;
   }
+
   @media (max-width:640px){ #water-layer{ opacity:.25; } }
   @media (prefers-reduced-motion: reduce){ #water-layer{ display:none; } }
   </style>
 </head>
+
 <body>
-  <body>
+  <!-- Water / Glass SVG filter -->
   <svg id="water-svg" width="0" height="0">
     <filter id="waterFilter">
       <feTurbulence id="waterNoise" type="fractalNoise" baseFrequency="0.008" numOctaves="2" seed="2"/>
@@ -47,6 +49,7 @@
     </filter>
   </svg>
   <div id="water-layer"></div>
+
   <!-- Floating navigation (top, centered) -->
   <nav class="dock" aria-label="Section navigation">
     <button data-target="#home" class="active">Home</button>
@@ -155,51 +158,51 @@
 
   <script defer src="assets/script.js"></script>
   <script>
-// magnetic snap scroll
-(() => {
-  const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const blocks = [...document.querySelectorAll('section')];
-  if (!blocks.length || prefersReduced) return;
-  let timer;
-  const delay = 80;
-  const nearest = () => {
-    const y = scrollY;
-    let best = {d: Infinity, top: 0};
-    for (const el of blocks) {
-      const top = el.getBoundingClientRect().top + y;
-      const d = Math.abs(top - y);
-      if (d < best.d) best = {d, top};
-    }
-    return best.top;
-  };
-  addEventListener('scroll', () => {
-    clearTimeout(timer);
-    timer = setTimeout(() => scrollTo({ top: nearest(), behavior: 'smooth' }), delay);
-  }, {passive: true});
-})();
+  // magnetic snap scroll
+  (() => {
+    const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const blocks = [...document.querySelectorAll('section')];
+    if (!blocks.length || prefersReduced) return;
+    let timer;
+    const delay = 80;
+    const nearest = () => {
+      const y = scrollY;
+      let best = {d: Infinity, top: 0};
+      for (const el of blocks) {
+        const top = el.getBoundingClientRect().top + y;
+        const d = Math.abs(top - y);
+        if (d < best.d) best = {d, top};
+      }
+      return best.top;
+    };
+    addEventListener('scroll', () => {
+      clearTimeout(timer);
+      timer = setTimeout(() => scrollTo({ top: nearest(), behavior: 'smooth' }), delay);
+    }, {passive: true});
+  })();
 
-// water / glass animation
-(() => {
-  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduced) return;
-  const svg = document.getElementById('water-svg');
-  const noise = svg?.querySelector('#waterNoise');
-  const disp  = svg?.querySelector('#waterDisp');
-  const layer = document.getElementById('water-layer');
-  if (!noise || !disp || !layer) return;
-  let raf, t = 0;
-  const baseFreq = 0.008, freqAmp = 0.004;
-  const scaleBase = 8, scaleAmp = 4;
-  function animate(){
-    t += 0.004;
-    const scrollMod = Math.min(1, Math.abs(scrollY % 600) / 600);
-    const bf = (baseFreq + freqAmp * Math.sin(t + scrollMod * Math.PI)).toFixed(4);
-    noise.setAttribute('baseFrequency', bf);
-    disp.setAttribute('scale', (scaleBase + scaleAmp * Math.sin(t*.6 + scrollMod)).toFixed(2));
-    raf = requestAnimationFrame(animate);
-  }
-  animate();
-})();
-</script>
+  // water / glass animation
+  (() => {
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced) return;
+    const svg = document.getElementById('water-svg');
+    const noise = svg?.querySelector('#waterNoise');
+    const disp  = svg?.querySelector('#waterDisp');
+    const layer = document.getElementById('water-layer');
+    if (!noise || !disp || !layer) return;
+    let raf, t = 0;
+    const baseFreq = 0.008, freqAmp = 0.004;
+    const scaleBase = 8, scaleAmp = 4;
+    function animate(){
+      t += 0.004;
+      const scrollMod = Math.min(1, Math.abs(scrollY % 600) / 600);
+      const bf = (baseFreq + freqAmp * Math.sin(t + scrollMod * Math.PI)).toFixed(4);
+      noise.setAttribute('baseFrequency', bf);
+      disp.setAttribute('scale', (scaleBase + scaleAmp * Math.sin(t*.6 + scrollMod)).toFixed(2));
+      raf = requestAnimationFrame(animate);
+    }
+    animate();
+  })();
+  </script>
 </body>
 </html>
