@@ -8,38 +8,39 @@
   <link rel="stylesheet" href="assets/style.css" />
 
   <style>
-    /* --- Language gate (blurred overlay) --- */
-.lang-gate {
-  position: fixed; inset: 0; z-index: 10000;
-  display: none; place-items: center;
-  background: rgba(0,0,0,.55);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-}
-.lang-card {
-  width: min(92vw, 560px);
-  background: rgba(15,15,15,.85);
-  border: 1px solid #2a2a2a;
-  border-radius: 16px;
-  padding: 22px;
-  box-shadow: 0 12px 40px rgba(0,0,0,.5);
-  text-align: center;
-}
-.lang-card h3 { margin: 0 0 8px; font-size: 20px; }
-.lang-card p  { margin: 0 0 18px; color: #a8a8a8; }
-.lang-choices { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-.lang-btn {
-  appearance: none; border: 1px solid #3b3b3b; background:#0f0f0f; color:#fff;
-  padding: 10px 18px; border-radius: 999px; font-weight: 600; cursor: pointer;
-}
-.lang-btn:hover { border-color:#6b6b6b; }
-.lang-skip { margin-top: 12px; display:inline-block; font-size: 13px; color:#b8d4ff; cursor:pointer; }
   html { scroll-behavior: smooth; }
   body {
     margin: 0;
     scroll-snap-type: y mandatory;
     -webkit-overflow-scrolling: touch;
   }
+
+  /* --- Language gate (blurred overlay) --- */
+  .lang-gate {
+    position: fixed; inset: 0; z-index: 10000;
+    display: none; place-items: center;
+    background: rgba(0,0,0,.55);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+  }
+  .lang-card {
+    width: min(92vw, 560px);
+    background: rgba(15,15,15,.85);
+    border: 1px solid #2a2a2a;
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow: 0 12px 40px rgba(0,0,0,.5);
+    text-align: center;
+  }
+  .lang-card h3 { margin: 0 0 8px; font-size: 20px; }
+  .lang-card p  { margin: 0 0 18px; color: #a8a8a8; }
+  .lang-choices { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .lang-btn {
+    appearance: none; border: 1px solid #3b3b3b; background:#0f0f0f; color:#fff;
+    padding: 10px 18px; border-radius: 999px; font-weight: 600; cursor: pointer;
+  }
+  .lang-btn:hover { border-color:#6b6b6b; }
+  .lang-skip { margin-top: 12px; display:inline-block; font-size: 13px; color:#b8d4ff; cursor:pointer; }
 
   /* water / glass overlay */
   #water-layer {
@@ -67,6 +68,20 @@
 </head>
 
 <body>
+  <!-- 🌐 Language chooser overlay -->
+  <div id="lang-gate" class="lang-gate" aria-modal="true" role="dialog">
+    <div class="lang-card">
+      <h3>Select your language</h3>
+      <p>Please choose your preferred language.</p>
+      <div class="lang-choices">
+        <button class="lang-btn" data-lang="EN">EN</button>
+        <button class="lang-btn" data-lang="DE">DE</button>
+        <button class="lang-btn" data-lang="AR">AR</button>
+      </div>
+      <span class="lang-skip" id="lang-skip">Continue in English</span>
+    </div>
+  </div>
+
   <!-- Water / Glass SVG filter -->
   <svg id="water-svg" width="0" height="0">
     <filter id="waterFilter">
@@ -83,6 +98,11 @@
     <button data-target="#how">How I Work</button>
     <button data-target="#clients">Clients</button>
     <button data-target="#contact">Contact</button>
+    <span style="margin-left:12px; opacity:.8">
+      <a href="/" onclick="localStorage.setItem('langChoice','EN')">EN</a> |
+      <a href="/de/" onclick="localStorage.setItem('langChoice','DE')">DE</a> |
+      <a href="/ar/" onclick="localStorage.setItem('langChoice','AR')">AR</a>
+    </span>
   </nav>
 
   <main>
@@ -148,7 +168,7 @@
         <h2>Contact</h2>
         <p class="muted">Share a few details and I’ll respond if it fits current advisory work.</p>
 
-        <!-- IMPORTANT: this posts to your Cloudflare Worker route on your domain -->
+        <!-- IMPORTANT: this posts to your Cloudflare Worker route -->
         <form action="/api/contact" method="POST">
           <div class="row2">
             <label>First name<input type="text" name="first_name" required /></label>
@@ -168,9 +188,7 @@
             <textarea name="message" placeholder="A few sentences on context, goals, and timeline"></textarea>
           </label>
 
-          <!-- Honeypot -->
           <input type="text" name="website" autocomplete="off" tabindex="-1" class="honeypot" />
-
           <label class="small"><input type="checkbox" name="consent" required /> I agree to be contacted about this inquiry.</label>
 
           <button class="btn" type="submit">Send</button>
@@ -228,6 +246,31 @@
       raf = requestAnimationFrame(animate);
     }
     animate();
+  })();
+
+  // language overlay logic
+  (() => {
+    const KEY = 'langChoice';
+    const gate = document.getElementById('lang-gate');
+    const saved = localStorage.getItem(KEY);
+    if (!saved) gate.style.display = 'grid';
+    const dest = (code) => {
+      if (code === 'DE') return '/de/';
+      if (code === 'AR') return '/ar/';
+      return '/';
+    };
+    gate?.addEventListener('click', (e) => {
+      const b = e.target.closest('.lang-btn');
+      if (b) {
+        const choice = b.dataset.lang.toUpperCase();
+        localStorage.setItem(KEY, choice);
+        location.href = dest(choice);
+      }
+    });
+    document.getElementById('lang-skip')?.addEventListener('click', () => {
+      localStorage.setItem(KEY, 'EN');
+      gate.style.display = 'none';
+    });
   })();
   </script>
 </body>
