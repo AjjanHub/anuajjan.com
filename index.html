@@ -15,6 +15,24 @@
     -webkit-overflow-scrolling: touch;
   }
 
+  /* top dock tweaks + language dropdown (plain letters) */
+  nav.dock { position: sticky; top: 8px; display:flex; gap:8px; justify-content:center; z-index: 5; }
+  .lang-dd { position: relative; margin-left: 12px; }
+  .lang-dd > button {
+    background: none; border: none; color: #ddd; font: 600 14px/1 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    padding: 4px 6px; cursor: pointer;
+  }
+  .lang-dd > button:after { content: '▾'; margin-left: 4px; font-size: 10px; opacity:.6; }
+  .lang-menu {
+    position: absolute; right: 0; top: 100%; margin-top: 6px;
+    background: transparent; border: 0; padding: 0; display: none;
+  }
+  .lang-menu a {
+    display: block; text-decoration: none; color: #ddd; padding: 4px 6px; font-weight: 600;
+  }
+  .lang-menu a:hover { text-decoration: underline; }
+  .lang-dd.open .lang-menu { display: block; }
+
   /* --- Language gate (blurred overlay) --- */
   .lang-gate {
     position: fixed; inset: 0; z-index: 10000;
@@ -24,46 +42,61 @@
     backdrop-filter: blur(10px);
   }
   .lang-card {
-    width: min(92vw, 560px);
+    width: min(92vw, 520px);
     background: rgba(15,15,15,.85);
     border: 1px solid #2a2a2a;
-    border-radius: 16px;
-    padding: 22px;
-    box-shadow: 0 12px 40px rgba(0,0,0,.5);
+    border-radius: 18px;
+    padding: 24px 22px;
     text-align: center;
+    transform: scale(.94);
+    opacity: 0;
+    animation: waterPop .6s cubic-bezier(.2,.7,.2,1) forwards;
   }
   .lang-card h3 { margin: 0 0 8px; font-size: 20px; }
-  .lang-card p  { margin: 0 0 18px; color: #a8a8a8; }
-  .lang-choices { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .lang-card p  { margin: 0 18px 18px; color: #a8a8a8; }
+  .lang-choices { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
   .lang-btn {
-    appearance: none; border: 1px solid #3b3b3b; background:#0f0f0f; color:#fff;
-    padding: 10px 18px; border-radius: 999px; font-weight: 600; cursor: pointer;
+    background: none; border: 0; color:#fff; padding: 8px 12px; border-radius: 999px; font-weight: 700; cursor: pointer;
   }
-  .lang-btn:hover { border-color:#6b6b6b; }
-  .lang-skip { margin-top: 12px; display:inline-block; font-size: 13px; color:#b8d4ff; cursor:pointer; }
+  .lang-btn:hover { text-decoration: underline; }
+  .lang-skip { margin-top: 10px; display:inline-block; font-size: 13px; color:#b8d4ff; cursor:pointer; }
+
+  @keyframes waterPop {
+    0%   { transform: scale(.94); opacity: 0; filter: blur(4px); }
+    60%  { transform: scale(1.03); opacity: 1; filter: blur(0); }
+    100% { transform: scale(1.00); opacity: 1; }
+  }
 
   /* water / glass overlay */
   #water-layer {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 999;
+    position: fixed; inset: 0; pointer-events: none; z-index: 1;
     background:
       radial-gradient(120% 80% at 50% -10%, rgba(255,255,255,.10), rgba(255,255,255,0) 60%),
       radial-gradient(90% 60% at 80% 10%, rgba(255,255,255,.06), rgba(255,255,255,0) 60%);
     filter: url(#waterFilter);
-    opacity: .35;
-    transition: opacity .25s ease;
+    opacity: .30;
+    transition: opacity .35s ease;
   }
 
   section {
     min-height: 100svh;
     scroll-snap-align: start;
     scroll-snap-stop: always;
+    position: relative;
+    z-index: 2; /* above water layer */
   }
 
-  @media (max-width:640px){ #water-layer{ opacity:.25; } }
-  @media (prefers-reduced-motion: reduce){ #water-layer{ display:none; } }
+  /* hero image smaller + softer */
+  .home-inner .avatar {
+    width: min(220px, 48vw); height: min(220px, 48vw); object-fit: cover; border-radius: 999px;
+    box-shadow: 0 10px 50px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.06) inset;
+  }
+
+  @media (max-width:640px){ #water-layer{ opacity:.22; } }
+  @media (prefers-reduced-motion: reduce){
+    #water-layer{ display:none; }
+    .lang-card{ animation:none; opacity:1; transform:none; }
+  }
   </style>
 </head>
 
@@ -98,27 +131,32 @@
     <button data-target="#how">How I Work</button>
     <button data-target="#clients">Clients</button>
     <button data-target="#contact">Contact</button>
-    <span style="margin-left:12px; opacity:.8">
-      <a href="/" onclick="localStorage.setItem('langChoice','EN')">EN</a> |
-      <a href="/de/" onclick="localStorage.setItem('langChoice','DE')">DE</a> |
-      <a href="/ar/" onclick="localStorage.setItem('langChoice','AR')">AR</a>
-    </span>
+
+    <!-- minimal language dropdown -->
+    <div class="lang-dd" id="lang-dd">
+      <button id="lang-current" aria-expanded="false" aria-haspopup="true">EN</button>
+      <div class="lang-menu" role="menu" aria-label="Language">
+        <a href="/"    role="menuitem" data-lang="EN">EN</a>
+        <a href="/de/" role="menuitem" data-lang="DE">DE</a>
+        <a href="/ar/" role="menuitem" data-lang="AR">AR</a>
+      </div>
+    </div>
   </nav>
 
   <main>
     <!-- HOME -->
     <section id="home" aria-label="Home">
-      <div class="wrap home-inner reveal">
+      <div class="wrap home-inner reveal" style="text-align:center">
         <img class="avatar" src="assets/profile.jpg" alt="Portrait of Anu Ajjan" />
         <h1>Anu Ajjan</h1>
         <p class="subhead">Senior advisor to leadership teams across Europe and the Middle East</p>
         <h3 class="tagline">Clarity. Delivery. Integrity.</h3>
-        <div class="text about">
+        <div class="text about" style="max-width:780px;margin:0 auto">
           <p>I help organisations move from discussion to delivery. Clear priorities, simple plans, steady results.</p>
           <p>I bring 20+ years working with senior teams. Executive education in applied business analytics at MIT Sloan supports a practical, evidence-based approach to decisions.</p>
           <p>I work with public institutions, research organisations, and companies where cross-team alignment and governance matter.</p>
         </div>
-        <blockquote class="quote">
+        <blockquote class="quote" style="max-width:780px;margin:20px auto">
           “His professional and constructive nature, focus, and diplomatic skills made him a highly valued partner in one of the world’s largest scientific expeditions.”
           <cite>— Prof. Dr. Stefan Frickenhaus, Alfred Wegener Institute (AWI)</cite>
         </blockquote>
@@ -234,7 +272,7 @@
     const disp  = svg?.querySelector('#waterDisp');
     const layer = document.getElementById('water-layer');
     if (!noise || !disp || !layer) return;
-    let raf, t = 0;
+    let t = 0;
     const baseFreq = 0.008, freqAmp = 0.004;
     const scaleBase = 8, scaleAmp = 4;
     function animate(){
@@ -243,22 +281,30 @@
       const bf = (baseFreq + freqAmp * Math.sin(t + scrollMod * Math.PI)).toFixed(4);
       noise.setAttribute('baseFrequency', bf);
       disp.setAttribute('scale', (scaleBase + scaleAmp * Math.sin(t*.6 + scrollMod)).toFixed(2));
-      raf = requestAnimationFrame(animate);
+      requestAnimationFrame(animate);
     }
     animate();
   })();
 
-  // language overlay logic
+  // language overlay + dropdown
   (() => {
     const KEY = 'langChoice';
     const gate = document.getElementById('lang-gate');
     const saved = localStorage.getItem(KEY);
-    if (!saved) gate.style.display = 'grid';
-    const dest = (code) => {
-      if (code === 'DE') return '/de/';
-      if (code === 'AR') return '/ar/';
-      return '/';
-    };
+    const layer = document.getElementById('water-layer');
+
+    // Show overlay only once; add iOS-like brief water glow
+    if (!saved) {
+      gate.style.display = 'grid';
+      if (layer) {
+        const old = getComputedStyle(layer).opacity;
+        layer.style.opacity = .42;
+        setTimeout(()=> layer.style.opacity = old, 450);
+      }
+    }
+
+    const dest = (code) => code === 'DE' ? '/de/' : code === 'AR' ? '/ar/' : '/';
+
     gate?.addEventListener('click', (e) => {
       const b = e.target.closest('.lang-btn');
       if (b) {
@@ -271,6 +317,27 @@
       localStorage.setItem(KEY, 'EN');
       gate.style.display = 'none';
     });
+
+    // minimal dropdown in dock
+    const dd = document.getElementById('lang-dd');
+    const btn = document.getElementById('lang-current');
+    const menu = dd?.querySelector('.lang-menu');
+    // set current label from saved choice if present
+    if (saved && btn) btn.textContent = saved;
+
+    btn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dd.classList.toggle('open');
+      btn.setAttribute('aria-expanded', dd.classList.contains('open') ? 'true' : 'false');
+    });
+    menu?.addEventListener('click', (e) => {
+      const a = e.target.closest('a[data-lang]');
+      if (!a) return;
+      const choice = a.dataset.lang;
+      localStorage.setItem(KEY, choice);
+      // let the href navigate normally
+    });
+    addEventListener('click', () => dd?.classList.remove('open'));
   })();
   </script>
 </body>
